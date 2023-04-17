@@ -25,6 +25,8 @@ import {
   teamEmailElementSx,
   teamManagerElementSx,
   teamSexElementSx,
+  SinglesExplanationTypography,
+  singlesExplanationTypographySx,
 } from "themes/TournamentApplication/teamInfoTheme";
 
 import {
@@ -38,11 +40,12 @@ import {
   setTeamManager,
 } from "ducks/tournamentApplication/slice";
 import { useTournamentApplicationHook } from "hooks/tournamentApplicationHook";
-import { teams, zones, sexies } from "common/constants";
+import { zones, sexies } from "common/constants";
 
 const TeamInfo: FC = () => {
   // ReactHook
-  const { teamInfo, dispatch } = useTournamentApplicationHook();
+  const { teamInfo, tournamentClass, dispatch, teamSelectChoice } =
+    useTournamentApplicationHook();
   return (
     <>
       <TeamInfoCard sx={teamInfoCardSx}>
@@ -51,23 +54,6 @@ const TeamInfo: FC = () => {
         </TeamInfoCardMedia>
         <TeamInfoCardContent sx={teamInfoCardContentSx}>
           <TeamInfoRow sx={teamInfoRowSx}>
-            <FormControl variant="outlined" sx={teamElementSx}>
-              <InputLabel id="team">チーム・学校名</InputLabel>
-              <Select
-                labelId="team"
-                id="チーム・学校名"
-                value={teamInfo.team}
-                onChange={(e) => {
-                  dispatch(setTeam(e.target.value));
-                }}
-              >
-                {teams.map((team, key) => (
-                  <MenuItem key={key} value={team.index}>
-                    {team.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
             <FormControl variant="outlined" sx={teamZoneElementSx}>
               <InputLabel id="teamZone">地区・支部名</InputLabel>
               <Select
@@ -85,6 +71,23 @@ const TeamInfo: FC = () => {
                 ))}
               </Select>
             </FormControl>
+            <FormControl variant="outlined" sx={teamElementSx}>
+              <InputLabel id="team">チーム・学校名</InputLabel>
+              <Select
+                labelId="team"
+                id="チーム・学校名"
+                value={teamInfo.team}
+                onChange={(e) => {
+                  dispatch(setTeam(e.target.value));
+                }}
+              >
+                {teamSelectChoice.map((team, key) => (
+                  <MenuItem key={key} value={team.index}>
+                    {team.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <FormControl variant="outlined" sx={teamRankElementSx}>
               <TextField
                 id="team-rank"
@@ -94,8 +97,14 @@ const TeamInfo: FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   dispatch(setTeamRank(e.target.value));
                 }}
+                disabled={tournamentClass === 1}
               />
             </FormControl>
+            {tournamentClass === 1 && (
+              <SinglesExplanationTypography sx={singlesExplanationTypographySx}>
+                ※シングルスの申込みの場合は[次へ]で進んだ画面で参加者単位に支部大会順位をご入力ください。
+              </SinglesExplanationTypography>
+            )}
           </TeamInfoRow>
           <TeamInfoRow sx={teamInfoRowSx}>
             <FormControl variant="outlined" sx={teamAddressElementSx}>

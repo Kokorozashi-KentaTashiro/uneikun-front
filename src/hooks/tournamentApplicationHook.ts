@@ -39,6 +39,7 @@ import { initTournamentRegistState } from "ducks/tournamentRegist/slice";
 import { initTournamentApplicationState } from "ducks/tournamentApplication/slice";
 import { initApplicationsState } from "ducks/applications/slice";
 import { initApplicationHistoryState } from "ducks/applicationHistory/slice";
+import { teams, TEAM } from "common/constants";
 
 export const useTournamentApplicationHook = () => {
   /** 変数 */
@@ -47,6 +48,7 @@ export const useTournamentApplicationHook = () => {
   const [stage, setStage] = useState<number>(0);
   const [confirmDisabled, setConfirmDisabled] = useState<boolean>(true);
   const [captainDisabled, setCaptainDisabled] = useState<boolean>(false);
+  const [teamSelectChoice, setTeamSelectChoice] = useState<TEAM[]>([]);
   const tornamentDetailInfo: TornamentDetailInfo = useSelector(
     selectTournamentDetailInfo
   );
@@ -65,6 +67,7 @@ export const useTournamentApplicationHook = () => {
   const userInfo: UserInfo = useSelector(selectUserInfo);
 
   // 関数
+
   // [次へ]
   const onClickNext = () => {
     switch (stage) {
@@ -169,6 +172,13 @@ export const useTournamentApplicationHook = () => {
     }
   };
 
+  // 「チーム・学校名」のチェック
+  const createTeamSelectChoice = useCallback(() => {
+    return teams.filter((team: TEAM) => {
+      return team.teamIndex === teamInfo.teamZone;
+    });
+  }, [teamInfo.teamZone]);
+
   // 「チーム情報」の入力チェック
   const teamInputCheck = useCallback(() => {
     const {
@@ -181,6 +191,9 @@ export const useTournamentApplicationHook = () => {
       teamFax,
       teamManager,
     } = { ...teamInfo };
+
+    setTeamSelectChoice(createTeamSelectChoice());
+
     if (
       team !== null &&
       teamZone !== null &&
@@ -195,7 +208,7 @@ export const useTournamentApplicationHook = () => {
     } else {
       return true;
     }
-  }, [teamInfo]);
+  }, [teamInfo, createTeamSelectChoice]);
 
   // 監督情報の入力チェック
   const directerInputCheck = useCallback(() => {
@@ -246,10 +259,16 @@ export const useTournamentApplicationHook = () => {
     let temporarySinglesDisable = false;
     singlesApplicationsInfo.forEach(
       (singlesApplicationInfo: SinglesApplicationInfo) => {
-        const { lastName, firstName, schoolYear, birthDay } = {
+        const { lastName, firstName, schoolYear, birthDay, rank } = {
           ...singlesApplicationInfo,
         };
-        if (lastName && firstName && schoolYear !== null && birthDay) {
+        if (
+          lastName &&
+          firstName &&
+          schoolYear !== null &&
+          rank !== null &&
+          birthDay
+        ) {
           if (temporarySinglesDisable) {
             temporarySinglesDisable = true;
           } else {
@@ -356,5 +375,6 @@ export const useTournamentApplicationHook = () => {
     onClickApply,
     onClickNext,
     onClickBack,
+    teamSelectChoice,
   };
 };

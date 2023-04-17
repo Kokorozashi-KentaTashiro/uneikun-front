@@ -10,6 +10,7 @@ import {
   applicationNameElementSx,
   applicationBirthdayElementSx,
   applicationSchoolYearElementSx,
+  applicationRankElementSx,
 } from "themes/ApplicationHistory/singlesListHistoryTheme";
 
 import { SinglesApplicationInfo } from "ducks/applicationHistory/type";
@@ -63,6 +64,14 @@ const SinglesListHistory: FC<Props> = (props: Props) => {
                     value={schoolYears[singlesApplicationInfo.schoolYear].label}
                     disabled
                     sx={applicationSchoolYearElementSx}
+                  />
+                  <DisableTextField
+                    id="application-rank"
+                    variant="outlined"
+                    label="支部大会順位"
+                    value={singlesApplicationInfo.rank}
+                    disabled
+                    sx={applicationRankElementSx}
                   />
                 </ApplicationCard>
               </>

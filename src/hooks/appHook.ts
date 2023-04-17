@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Hub } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";
 import { Auth } from "aws-amplify";
@@ -15,11 +15,15 @@ import {
 import { SignInInfo } from "ducks/auth/type";
 import { AppDispatch } from "app/store";
 import { fetchAsyncPutUserInfo } from "ducks/auth/slice";
+import { setSignInPhone, setSignInPassword } from "ducks/auth/slice";
 
 export const useAppHook = () => {
   // Redux変数
   const dispatch = useDispatch<AppDispatch>();
   const signInInfo: SignInInfo = useSelector(selectSignInInfo);
+
+  // 変数
+  const [signInErr, setSignInErr] = useState<string | null>(null);
 
   // 関数
   const getUser = async () => {
@@ -52,7 +56,9 @@ export const useAppHook = () => {
           break;
 
         case "signIn_failure":
-          console.log("Sign in failure", data);
+          setSignInErr("※正しい電話番号・パスワードを入力してください。");
+          dispatch(setSignInPhone(""));
+          dispatch(setSignInPassword(""));
           break;
 
         // SignUp
@@ -90,6 +96,10 @@ export const useAppHook = () => {
         case "signOut":
           dispatch(initAuthState());
           break;
+
+        default:
+          console.log("該当なし");
+          break;
       }
     });
 
@@ -101,5 +111,6 @@ export const useAppHook = () => {
 
   return {
     signInInfo,
+    signInErr,
   };
 };

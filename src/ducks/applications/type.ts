@@ -46,6 +46,7 @@ export type SinglesApplicationInfo = {
   firstName: string;
   schoolYear: number;
   birthDay: string;
+  rank: number;
 };
 
 /** 団体戦応募情報 */

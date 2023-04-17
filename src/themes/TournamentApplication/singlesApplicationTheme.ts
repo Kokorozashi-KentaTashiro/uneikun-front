@@ -50,19 +50,22 @@ export const singlesApplicantTableHeadRowSx: SxProps<Theme> = {
     backgroundColor: "#D9D9D9",
   },
   "& th:nth-child(1)": {
-    width: 80,
+    width: 50,
   },
   "& th:nth-child(2)": {
-    width: 80,
+    width: 50,
   },
   "& th:nth-child(3)": {
     width: 100,
   },
   "& th:nth-child(4)": {
-    width: 30,
+    width: 20,
   },
   "& th:nth-child(5)": {
-    width: 10,
+    width: 20,
+  },
+  "& th:nth-child(6)": {
+    width: 20,
   },
 };
 

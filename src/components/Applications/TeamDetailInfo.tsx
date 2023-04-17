@@ -1,8 +1,5 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
-
 import { Typography } from "@mui/material";
-
 import {
   TeamCard,
   teamCardSx,
@@ -18,11 +15,8 @@ import {
   teamManagerElementSx,
   teamSexElementSx,
 } from "themes/Applications/teamDetailInfoTheme";
-
-import { selectApplicantGroupsInfo } from "ducks/applications/slice";
-import { ApplicantGroupInfo } from "ducks/applications/type";
-
 import { teams, zones, sexies } from "common/constants";
+import { useApplicationsHook } from "hooks/applicationsHook";
 
 type Props = {
   arrayIndex: number;
@@ -31,9 +25,7 @@ type Props = {
 const TeamDetailInfo: FC<Props> = (props: Props) => {
   /** 変数 */
   const arrayIndex = props.arrayIndex;
-  const applicantGroupsInfo: ApplicantGroupInfo[] = useSelector(
-    selectApplicantGroupsInfo
-  );
+  const { tournamentClass, applicantGroupsInfo } = useApplicationsHook();
   const teamDetailInfo = applicantGroupsInfo[arrayIndex].teamDetailInfo;
   return (
     <>
@@ -58,14 +50,16 @@ const TeamDetailInfo: FC<Props> = (props: Props) => {
             disabled
             sx={teamZoneElementSx}
           />
-          <DisableTextField
-            id="team-rank"
-            variant="outlined"
-            label="支部大会順位"
-            value={teamDetailInfo.teamRank}
-            disabled
-            sx={teamRankElementSx}
-          />
+          {tournamentClass === 0 && (
+            <DisableTextField
+              id="team-rank"
+              variant="outlined"
+              label="支部大会順位"
+              value={teamDetailInfo.teamRank}
+              disabled
+              sx={teamRankElementSx}
+            />
+          )}
         </TeamRow>
         <TeamRow sx={teamRowSx}>
           <DisableTextField

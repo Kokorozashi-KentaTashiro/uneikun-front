@@ -172,6 +172,11 @@ export const tournamentApplicationSlice = createSlice({
         state.singlesApplicationsInfo[action.payload.index];
       tornamentApplicationInfo.birthDay = action.payload.value;
     },
+    setSinglesRank(state: TornamentApplicationState, action) {
+      const tornamentApplicationInfo =
+        state.singlesApplicationsInfo[action.payload.index];
+      tornamentApplicationInfo.rank = action.payload.value;
+    },
 
     // 団体戦応募情報
     addTeamApplicationInfo(state: TornamentApplicationState) {
@@ -281,6 +286,7 @@ export const {
   setSinglesFirstName,
   setSinglesSchoolYear,
   setSinglesBirthDay,
+  setSinglesRank,
   // 団体戦応募情報
   addTeamApplicationInfo,
   deleteTeamApplicationInfo,

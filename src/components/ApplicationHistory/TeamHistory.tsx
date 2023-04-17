@@ -1,6 +1,4 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
-
 import { Typography } from "@mui/material";
 
 import {
@@ -18,11 +16,8 @@ import {
   teamManagerElementSx,
   teamSexElementSx,
 } from "themes/ApplicationHistory/teamHistoryTheme";
-
-import { selectHistoryGroupsInfo } from "ducks/applicationHistory/slice";
-import { HistoryGroupInfo } from "ducks/applicationHistory/type";
-
 import { teams, zones, sexies } from "common/constants";
+import { useApplicationHistoryHook } from "hooks/applicationHistoryHook";
 
 type Props = {
   arrayIndex: number;
@@ -31,9 +26,7 @@ type Props = {
 const TeamHistory: FC<Props> = (props: Props) => {
   /** 変数 */
   const arrayIndex = props.arrayIndex;
-  const historyGroupsInfo: HistoryGroupInfo[] = useSelector(
-    selectHistoryGroupsInfo
-  );
+  const { tournamentClass, historyGroupsInfo } = useApplicationHistoryHook();
   const teamDetailInfo = historyGroupsInfo[arrayIndex].teamDetailInfo;
   return (
     <>
@@ -58,14 +51,16 @@ const TeamHistory: FC<Props> = (props: Props) => {
             disabled
             sx={teamZoneElementSx}
           />
-          <DisableTextField
-            id="team-rank"
-            variant="outlined"
-            label="支部大会順位"
-            value={teamDetailInfo.teamRank}
-            disabled
-            sx={teamRankElementSx}
-          />
+          {tournamentClass === 0 && (
+            <DisableTextField
+              id="team-rank"
+              variant="outlined"
+              label="支部大会順位"
+              value={teamDetailInfo.teamRank}
+              disabled
+              sx={teamRankElementSx}
+            />
+          )}
         </TeamRow>
         <TeamRow sx={teamRowSx}>
           <DisableTextField

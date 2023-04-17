@@ -10,6 +10,7 @@ import {
   applicationNameElementSx,
   applicationBirthdayElementSx,
   applicationSchoolYearElementSx,
+  applicationRankElementSx,
 } from "themes/Applications/singlesApplicationsListTheme";
 
 import { SinglesApplicationInfo } from "ducks/applications/type";
@@ -64,6 +65,14 @@ const SinglesApplicationsList: FC<Props> = (props: Props) => {
                     value={schoolYears[singlesApplicationInfo.schoolYear].label}
                     disabled
                     sx={applicationSchoolYearElementSx}
+                  />
+                  <DisableTextField
+                    id="application-rank"
+                    variant="outlined"
+                    label="支部大会順位"
+                    value={singlesApplicationInfo.rank}
+                    disabled
+                    sx={applicationRankElementSx}
                   />
                 </ApplicationCard>
               </>

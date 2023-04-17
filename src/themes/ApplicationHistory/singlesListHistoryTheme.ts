@@ -38,7 +38,7 @@ export const applicationsCardSx: SxProps<Theme> = {
 };
 
 export const applicationCardSx: SxProps<Theme> = {
-  width: { xs: 300, md: 500 },
+  width: { xs: 300, md: 560 },
   paddingTop: { xs: 1, md: 2 },
   paddingBottom: { xs: 1, md: 1.5 },
   marginTop: 1,
@@ -47,13 +47,17 @@ export const applicationCardSx: SxProps<Theme> = {
 };
 
 export const applicationNameElementSx: SxProps<Theme> = {
-  width: { xs: 300, md: 200 },
+  width: { xs: 300, md: 190 },
 };
 
 export const applicationBirthdayElementSx: SxProps<Theme> = {
-  width: { xs: 300, md: 150 },
+  width: { xs: 300, md: 120 },
 };
 
 export const applicationSchoolYearElementSx: SxProps<Theme> = {
   width: { xs: 300, md: 60 },
+};
+
+export const applicationRankElementSx: SxProps<Theme> = {
+  width: { xs: 300, md: 100 },
 };

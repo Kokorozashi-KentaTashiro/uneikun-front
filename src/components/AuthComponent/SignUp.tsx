@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 import {
   setSignUpFamiliyName,
@@ -20,8 +20,16 @@ import { useAuthComponentHook } from "hooks/authComponentHook";
 
 const SignUp: FC = () => {
   // ReactHook
-  const { dispatch, signUpInfo, onClickSignUpButton, getSignUpLabel } =
-    useAuthComponentHook();
+  const {
+    dispatch,
+    signUpInfo,
+    onClickSignUpButton,
+    getSignUpLabel,
+    getSignUpDisabled,
+    passwordErrs,
+    createErr,
+    confirmErr,
+  } = useAuthComponentHook();
 
   return (
     <>
@@ -37,7 +45,9 @@ const SignUp: FC = () => {
               onChange={(e) => {
                 dispatch(setSignUpVerifyCode(e.target.value));
               }}
+              error={confirmErr !== null}
             />
+            {confirmErr !== null && <Typography>{`※${confirmErr}`}</Typography>}
           </>
         ) : (
           <>
@@ -82,7 +92,12 @@ const SignUp: FC = () => {
               onChange={(e) => {
                 dispatch(setSignUpPassword(e.target.value));
               }}
+              error={passwordErrs.length !== 0}
             />
+            {passwordErrs.map((passwordErr) => {
+              return <Typography>{`※${passwordErr}`}</Typography>;
+            })}
+            {createErr !== null && <Typography>{`※${createErr}`}</Typography>}
           </>
         )}
       </SignUpCommonCard>
@@ -93,6 +108,7 @@ const SignUp: FC = () => {
           onClickSignUpButton();
         }}
         sx={signUpCommonButtonSx}
+        disabled={getSignUpDisabled()}
       >
         {getSignUpLabel()}
       </SignUpCommonButton>

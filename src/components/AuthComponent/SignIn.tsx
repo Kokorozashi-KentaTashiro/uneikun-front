@@ -10,12 +10,16 @@ import {
   SignInCommonButton,
   signInCommonButtonSx,
   signInTextSx,
+  SignInTypography,
+  signInTypographySx,
 } from "themes/AuthComponent/signInTheme";
 import { useAuthComponentHook } from "hooks/authComponentHook";
+import { useAppHook } from "hooks/appHook";
 
 const SignIn: FC = () => {
   // ReactHook
   const { dispatch, signInInfo, onSignIn } = useAuthComponentHook();
+  const { signInErr } = useAppHook();
 
   return (
     <>
@@ -42,6 +46,11 @@ const SignIn: FC = () => {
           }}
           sx={signInTextSx}
         />
+        {signInErr !== null && (
+          <SignInTypography sx={signInTypographySx}>
+            {signInErr}
+          </SignInTypography>
+        )}
       </SignInCommonCard>
       <SignInCommonButton
         variant="contained"

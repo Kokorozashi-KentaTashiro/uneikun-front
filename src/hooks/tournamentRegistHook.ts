@@ -65,6 +65,7 @@ export const useTournamentRegistHook = () => {
   }, [tournamentRegistInfo]);
 
   // 関数
+
   // 「大会名」入力時の処理
   const changeTitleVal = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTournamentTitle(e.target.value));

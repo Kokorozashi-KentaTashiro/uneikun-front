@@ -31,6 +31,7 @@ export const initialSinglesApplicationInfo: SinglesApplicationInfo = {
   firstName: "",
   schoolYear: 0,
   birthDay: "",
+  rank: 0,
 };
 
 export const initialTeamApplicationInfo: TeamApplicationInfo = {

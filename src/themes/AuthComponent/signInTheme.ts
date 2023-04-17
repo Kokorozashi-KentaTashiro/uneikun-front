@@ -1,5 +1,5 @@
 import { SxProps, Theme } from "@mui/material/styles";
-import { Button, Card } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import emotionStyled from "@emotion/styled";
 // emotionStyled（スタイル）
 export const SignInCommonCard = emotionStyled(Card)`
@@ -19,6 +19,11 @@ box-shadow: 0 3px 0 #163030;
   }
 `;
 
+export const SignInTypography = emotionStyled(Typography)`
+color: red;
+font-weight: normal;
+`;
+
 // Theme（レスポンシブスタイル）
 export const signInCommonCardSx: SxProps<Theme> = {
   width: { xs: 300, md: 400 },
@@ -34,4 +39,8 @@ export const signInCommonButtonSx: SxProps<Theme> = {
 
 export const signInTextSx: SxProps<Theme> = {
   margin: 2,
+};
+
+export const signInTypographySx: SxProps<Theme> = {
+  fontSize: { xs: 8, md: 10 },
 };

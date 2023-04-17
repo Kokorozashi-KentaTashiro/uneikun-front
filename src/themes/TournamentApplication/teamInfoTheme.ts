@@ -1,5 +1,5 @@
 import { SxProps, Theme } from "@mui/material/styles";
-import { Card, CardMedia, CardContent, Box } from "@mui/material";
+import { Card, CardMedia, CardContent, Box, Typography } from "@mui/material";
 import emotionStyled from "@emotion/styled";
 
 // emotionStyled（スタイル）
@@ -40,21 +40,26 @@ justify-content: center;
 align-items: center;
 `;
 
+export const SinglesExplanationTypography = emotionStyled(Box)`
+color: red;
+font-weight: normal;
+`;
+
 // Theme（レスポンシブスタイル）
 export const teamInfoCardSx: SxProps<Theme> = {
   width: { xs: 300, md: 750 },
-  height: { xs: 300, md: 550 },
+  minHeight: { xs: 300, md: 550 },
   margin: { xs: 1, md: 2 },
 };
 
 export const teamInfoCardMediaSx: SxProps<Theme> = {
   width: { xs: 300, md: 750 },
-  height: { xs: 50, md: 100 },
+  minHeight: { xs: 50, md: 100 },
   fontSize: { xs: 15, md: 25 },
 };
 
 export const teamInfoCardContentSx: SxProps<Theme> = {
-  height: { xs: 50, md: 450 },
+  minHeight: { xs: 50, md: 450 },
 };
 
 export const teamInfoRowSx: SxProps<Theme> = {
@@ -94,4 +99,8 @@ export const teamManagerElementSx: SxProps<Theme> = {
 
 export const teamSexElementSx: SxProps<Theme> = {
   width: { xs: 15, md: 90 },
+};
+
+export const singlesExplanationTypographySx: SxProps<Theme> = {
+  fontSize: { xs: 12, md: 14 },
 };

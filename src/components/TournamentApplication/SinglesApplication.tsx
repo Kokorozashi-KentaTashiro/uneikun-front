@@ -37,6 +37,7 @@ import {
   setSinglesLastName,
   setSinglesFirstName,
   setSinglesSchoolYear,
+  setSinglesRank,
   deleteSinglesApplicationInfo,
 } from "ducks/tournamentApplication/slice";
 
@@ -61,6 +62,7 @@ const SinglesApplication: FC = () => {
               <TableCell align="center">参加者氏名（名）</TableCell>
               <TableCell align="center">生年月日</TableCell>
               <TableCell align="center">学年</TableCell>
+              <TableCell align="center">支部大会順位</TableCell>
               <TableCell align="center">delete</TableCell>
             </TableRow>
           </TableHead>
@@ -136,6 +138,22 @@ const SinglesApplication: FC = () => {
                     </Select>
                   </FormControl>
                 </SinglesApplicantTableBodyCell>
+                <SinglesApplicantTableBodyCell align="center">
+                  <TextField
+                    id="application-rank"
+                    variant="outlined"
+                    value={singlesApplicationInfo.rank}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      dispatch(
+                        setSinglesRank({
+                          index: index,
+                          value: e.target.value,
+                        })
+                      );
+                    }}
+                  />
+                </SinglesApplicantTableBodyCell>
+
                 <SinglesApplicantTableBodyCell align="center">
                   {index >= 1 && (
                     <DeleteIcon
