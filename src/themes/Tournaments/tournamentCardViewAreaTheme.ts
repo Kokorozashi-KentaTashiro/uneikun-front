@@ -33,10 +33,10 @@ export const viewAreaSx: SxProps<Theme> = {
 };
 
 export const viewElementDateCardSx: SxProps<Theme> = {
-  width: { xs: 80, sm: 90, md: 120, lg: 150 },
+  width: { xs: 90, sm: 100, md: 120, lg: 150 },
   height: { xs: 60, sm: 80, md: 100, lg: 110 },
-  marginRight: { xs: 1, sm: 1.5, md: 1.8, lg: 2 },
-  marginLeft: { xs: 1, sm: 1.5, md: 1.8, lg: 2 },
+  marginRight: { xs: 0.5, sm: 1, md: 1.8, lg: 2 },
+  marginLeft: { xs: 0.5, sm: 1, md: 1.8, lg: 2 },
 };
 
 export const viewElementDateCardMediaSx: SxProps<Theme> = {
@@ -53,10 +53,10 @@ export const viewElementDateCardContentSx: SxProps<Theme> = {
 };
 
 export const viewElementPlaceCardSx: SxProps<Theme> = {
-  width: { xs: 115, sm: 220, md: 240, lg: 300 },
+  width: { xs: 120, sm: 220, md: 240, lg: 300 },
   height: { xs: 60, sm: 80, md: 100, lg: 110 },
-  marginRight: { xs: 1, sm: 1.5, md: 1.8, lg: 2 },
-  marginLeft: { xs: 1, sm: 1.5, md: 1.8, lg: 2 },
+  marginRight: { xs: 0.5, sm: 1, md: 1.8, lg: 2 },
+  marginLeft: { xs: 0.5, sm: 1, md: 1.8, lg: 2 },
 };
 
 export const viewElementPlaceCardMediaSx: SxProps<Theme> = {
