@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,7 +20,6 @@ import {
 import { TornamentInfo } from "ducks/tournaments/type";
 import { setTournamentDetailInfo } from "ducks/tournamentDetail/slice";
 import { selectPage, setPage } from "ducks/effect/slice";
-import { fetchAsyncGetTournaments } from "ducks/tournaments/slice";
 import { selectUserInfo } from "ducks/auth/slice";
 import { UserInfo } from "ducks/auth/type";
 
@@ -36,13 +34,6 @@ export const useTournamentsHook = () => {
   const userInfo: UserInfo = useSelector(selectUserInfo);
   const isAdmin = userInfo.isAdmin;
   const page: string = useSelector(selectPage);
-
-  // useEffect
-  useEffect(() => {
-    (async () => {
-      await dispatch(fetchAsyncGetTournaments());
-    })();
-  }, [page, dispatch]);
 
   // [この大会へ申し込む]
   const onClickApply = (tournamentInfo: TornamentInfo) => {

@@ -43,7 +43,7 @@ const Layout: FC<Props> = (props: Props) => {
           })}
         </BreadcrumbsContainer>
       </BreadcrumbsBox>
-      <AppContainer maxWidth={false}>{children}</AppContainer>
+      <AppContainer>{children}</AppContainer>
       <Footer />
     </>
   );
