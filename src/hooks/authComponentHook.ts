@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Auth } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,20 +6,30 @@ import {
   selectSignUpInfo,
   selectIsLoading,
   selectSignInInfo,
+  selectPasswordResetInfo,
+  initPasswordResetInfo,
 } from "ducks/auth/slice";
-import { SignUpInfo, SignInInfo } from "ducks/auth/type";
+import { SignUpInfo, SignInInfo, PasswordResetInfo } from "ducks/auth/type";
 import { AppDispatch } from "app/store";
 
 export const useAuthComponentHook = () => {
-  // 変数
+  // Redux
   const dispatch = useDispatch<AppDispatch>();
   const signUpInfo: SignUpInfo = useSelector(selectSignUpInfo);
   const signInInfo: SignInInfo = useSelector(selectSignInInfo);
+  const passwordResetInfo: PasswordResetInfo = useSelector(
+    selectPasswordResetInfo
+  );
   const isLoading: boolean = useSelector(selectIsLoading);
+
+  // useState
   const [createDisable, setCreateDisable] = useState<boolean>(false);
-  const [passwordErrs, setPasswordErrs] = useState<string[]>([]);
+  const [resetDisable, setResetDisable] = useState<boolean>(false);
+  const [signUpPasswordErrs, setSignUpPasswordErrs] = useState<string[]>([]);
+  const [resetPasswordErrs, setResetPasswordErrs] = useState<string[]>([]);
   const [createErr, setCreateErr] = useState<string | null>(null);
   const [confirmErr, setConfirmErr] = useState<string | null>(null);
+  const [passResetFlg, setPassResetFlg] = useState<boolean>(false);
 
   // [新規会員登録]
   const onCognitoSignUp = useCallback(() => {
@@ -117,6 +127,29 @@ export const useAuthComponentHook = () => {
     });
   };
 
+  // [SMS送信（パスワードリセット）]
+  const forgotPassword = async () => {
+    await Auth.forgotPassword(`+81${passwordResetInfo.phone.slice(1)}`);
+  };
+
+  // [リセット（パスワードリセット）]
+  const forgotPasswordConfirm = async () => {
+    try {
+      await Auth.forgotPasswordSubmit(
+        `+81${passwordResetInfo.phone.slice(1)}`,
+        passwordResetInfo.code,
+        passwordResetInfo.newPassword
+      );
+      dispatch(initPasswordResetInfo());
+      setPassResetFlg(false);
+
+      console.log("OK");
+    } catch (error) {
+      console.log("NG");
+      console.log(error);
+    }
+  };
+
   // SignUpでのボタン押下共通処理
   const onClickSignUpButton = useCallback(() => {
     signUpInfo.createStatus ? onCognitoVerify() : onCognitoSignUp();
@@ -144,8 +177,8 @@ export const useAuthComponentHook = () => {
     return res;
   }, [signUpInfo.createStatus, createDisable]);
 
-  // パスワードチェック
-  const checkPassword = useCallback(() => {
+  // パスワードチェック（SignUp）
+  const checkSignUpPassword = useCallback(() => {
     // 桁数チェック
     let lengthCheck = false;
     if (signUpInfo.password.length < 8) {
@@ -202,7 +235,7 @@ export const useAuthComponentHook = () => {
     if (numberCheck) {
       errArray.push("パスワードは数値を入力してください");
     }
-    setPasswordErrs(errArray);
+    setSignUpPasswordErrs(errArray);
 
     if (
       lengthCheck ||
@@ -217,29 +250,102 @@ export const useAuthComponentHook = () => {
     }
   }, [signUpInfo.password]);
 
-  // useEffect
-  useEffect(() => {
-    const { familiyName, givenName, phone } = { ...signUpInfo };
-    setCreateDisable(
-      familiyName === null ||
-        givenName === null ||
-        phone === null ||
-        checkPassword()
+  // パスワードチェック（PassWordReset）
+  const checkResetPassword = useCallback(() => {
+    // 桁数チェック
+    let lengthCheck = false;
+    if (passwordResetInfo.newPassword.length < 8) {
+      lengthCheck = true;
+    }
+
+    // 数値を含む
+    let numberCheck = false;
+    const numberPattern = new RegExp(`^.*\\d.*`);
+    if (!numberPattern.test(passwordResetInfo.newPassword)) {
+      numberCheck = true;
+    }
+
+    // 特殊文字を含む
+    let specialCheck = false;
+    const specialPattern = new RegExp(
+      `[\\^||\\$||\\*||\\.||\\[||\\]||\\{||\\}||\\(||\\)||\\?||\\-||\\"||\\!||\\@||\\#||\\%||\\&||\\/||\\,||\\>||\\<||\\'||\\:||\\;||\\|||\\_||\\~||\\+||\\=]`
     );
-  }, [signUpInfo, checkPassword]);
+    const specialSinglePattern = new RegExp("[' || /]");
+    if (!specialPattern.test(passwordResetInfo.newPassword)) {
+      if (!specialSinglePattern.test(passwordResetInfo.newPassword)) {
+        specialCheck = true;
+      }
+    }
+
+    // 大文字を含む
+    let upperCheck = false;
+    const upperPattern = new RegExp(`[A-Z]`);
+    if (!upperPattern.test(passwordResetInfo.newPassword)) {
+      upperCheck = true;
+    }
+
+    // 小文字を含む
+    let lowerCheck = false;
+    const lowerPattern = new RegExp(`[a-z]`);
+    if (!lowerPattern.test(passwordResetInfo.newPassword)) {
+      lowerCheck = true;
+    }
+
+    // レスポンス判定
+    let errArray = [];
+    if (lengthCheck) {
+      errArray.push("パスワードは8文字以上を入力してください");
+    }
+    if (specialCheck) {
+      errArray.push("パスワードに特殊文字を含めてください");
+    }
+    if (upperCheck) {
+      errArray.push("パスワードに大文字を含めてください");
+    }
+    if (lowerCheck) {
+      errArray.push("パスワードに子文字を含めてください");
+    }
+    if (numberCheck) {
+      errArray.push("パスワードは数値を入力してください");
+    }
+    setResetPasswordErrs(errArray);
+
+    if (
+      lengthCheck ||
+      specialCheck ||
+      upperCheck ||
+      lowerCheck ||
+      numberCheck
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [passwordResetInfo.newPassword]);
 
   return {
     dispatch,
     signUpInfo,
     signInInfo,
+    passwordResetInfo,
+    passResetFlg,
+    resetPasswordErrs,
+    checkResetPassword,
+    setPassResetFlg,
+    forgotPassword,
+    forgotPasswordConfirm,
+    resetDisable,
+    setResetDisable,
     isLoading,
     onSignIn,
     onClickSignUpButton,
     getSignUpLabel,
     getSignUpDisabled,
     createDisable,
-    passwordErrs,
+    signUpPasswordErrs,
     createErr,
     confirmErr,
+    setCreateDisable,
+    checkSignUpPassword,
   };
 };

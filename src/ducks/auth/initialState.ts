@@ -7,6 +7,12 @@ export const initialState: AuthState = {
     userId: "",
     signInStatus: false,
   },
+  passwordResetInfo: {
+    phone: "",
+    code: "",
+    newPassword: "",
+    resetStatus: 0,
+  },
   signUpInfo: {
     userId: "",
     familiyName: "",

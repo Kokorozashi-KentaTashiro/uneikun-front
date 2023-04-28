@@ -1,6 +1,7 @@
 export type AuthState = {
   isLoading: boolean;
   signInInfo: SignInInfo;
+  passwordResetInfo: PasswordResetInfo;
   signUpInfo: SignUpInfo;
   userInfo: UserInfo;
 };
@@ -11,6 +12,14 @@ export type SignInInfo = {
   password: string;
   userId: string;
   signInStatus: boolean;
+};
+
+/** PassWordリセット情報 */
+export type PasswordResetInfo = {
+  phone: string;
+  code: string;
+  newPassword: string;
+  resetStatus: number;
 };
 
 /** SignUp情報 */

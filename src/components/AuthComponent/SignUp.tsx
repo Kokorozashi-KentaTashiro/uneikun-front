@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 import { TextField, Typography } from "@mui/material";
 
@@ -26,10 +26,23 @@ const SignUp: FC = () => {
     onClickSignUpButton,
     getSignUpLabel,
     getSignUpDisabled,
-    passwordErrs,
+    signUpPasswordErrs,
     createErr,
     confirmErr,
+    setCreateDisable,
+    checkSignUpPassword,
   } = useAuthComponentHook();
+
+  // useEffect
+  useEffect(() => {
+    const { familiyName, givenName, phone } = { ...signUpInfo };
+    setCreateDisable(
+      familiyName === null ||
+        givenName === null ||
+        phone === null ||
+        checkSignUpPassword()
+    );
+  }, [signUpInfo, setCreateDisable, checkSignUpPassword]);
 
   return (
     <>
@@ -92,10 +105,10 @@ const SignUp: FC = () => {
               onChange={(e) => {
                 dispatch(setSignUpPassword(e.target.value));
               }}
-              error={passwordErrs.length !== 0}
+              error={signUpPasswordErrs.length !== 0}
             />
-            {passwordErrs.map((passwordErr) => {
-              return <Typography>{`※${passwordErr}`}</Typography>;
+            {signUpPasswordErrs.map((signUpPasswordErr) => {
+              return <Typography>{`※${signUpPasswordErr}`}</Typography>;
             })}
             {createErr !== null && <Typography>{`※${createErr}`}</Typography>}
           </>

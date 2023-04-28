@@ -35,9 +35,20 @@ export const AppContainer = emotionStyled(Box)`
     align-items: center;
     padding: 0;
     margin: 0;
-    min-height: calc(100vh - 209px);
     max-width: none;
     width: 100%;
+    @media (max-width:599px) {
+        min-height: calc(100vh - 186px);
+      }
+      @media (min-width:600px) {
+        min-height: calc(100vh - 186px);
+      }
+      @media (min-width:900px) {
+        min-height: calc(100vh - 209px);
+    }
+      @media (min-width:1200px) {
+        min-height: calc(100vh - 209px);
+      }
 `;
 
 export const AppBox = emotionStyled(Container)`

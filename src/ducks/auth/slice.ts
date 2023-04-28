@@ -129,6 +129,54 @@ export const authSlice = createSlice({
         },
       };
     },
+    // PasswordResetInfo
+    initPasswordResetInfo(state: AuthState) {
+      return {
+        ...state,
+        passwordResetInfo: {
+          ...initialState.passwordResetInfo,
+        },
+      };
+    },
+    setPasswordResetPhone(state: AuthState, action) {
+      return {
+        ...state,
+        passwordResetInfo: {
+          ...state.passwordResetInfo,
+          phone: action.payload,
+        },
+      };
+    },
+    setPasswordResetCode(state: AuthState, action) {
+      return {
+        ...state,
+        passwordResetInfo: {
+          ...state.passwordResetInfo,
+          code: action.payload,
+        },
+      };
+    },
+    setPasswordResetNewPassword(state: AuthState, action) {
+      return {
+        ...state,
+        passwordResetInfo: {
+          ...state.passwordResetInfo,
+          newPassword: action.payload,
+        },
+      };
+    },
+    setPasswordResetResetStatus(state: AuthState, action) {
+      console.log("slice実行");
+      console.log(action.payload);
+      return {
+        ...state,
+        passwordResetInfo: {
+          ...state.passwordResetInfo,
+          resetStatus: action.payload,
+        },
+      };
+    },
+
     // SignUpInfo
     initSignUpInfo(state: AuthState) {
       return {
@@ -289,6 +337,11 @@ export const {
   initSignInInfo,
   setSignInPhone,
   setSignInPassword,
+  initPasswordResetInfo,
+  setPasswordResetPhone,
+  setPasswordResetCode,
+  setPasswordResetNewPassword,
+  setPasswordResetResetStatus,
   initSignUpInfo,
   setSignUpUserId,
   setSignUpFamiliyName,
@@ -301,6 +354,8 @@ export const {
 
 export const selectIsLoading = (state: RootState) => state.auth.isLoading;
 export const selectSignInInfo = (state: RootState) => state.auth.signInInfo;
+export const selectPasswordResetInfo = (state: RootState) =>
+  state.auth.passwordResetInfo;
 export const selectSignUpInfo = (state: RootState) => state.auth.signUpInfo;
 export const selectUserInfo = (state: RootState) => state.auth.userInfo;
 export default authSlice.reducer;

@@ -22,7 +22,7 @@ const AuthComponent: FC = () => {
             <CommonLink
               underline="hover"
               onClick={() => setSignFlg(!signFlg)}
-              sx={{ marginTop: { xs: 4, md: 6 } }}
+              sx={{ marginTop: { xs: 2, md: 4 } }}
             >
               {signFlg ? "ログインはこちら" : "新規登録はこちら"}
             </CommonLink>

@@ -24,6 +24,8 @@ export const useAppHook = () => {
 
   // 変数
   const [signInErr, setSignInErr] = useState<string | null>(null);
+  const [forgotErr, setForgotErr] = useState<string | null>(null);
+  const [forgotConfirmErr, setForgotConfirmErr] = useState<string | null>(null);
 
   // 関数
   const getUser = async () => {
@@ -97,6 +99,71 @@ export const useAppHook = () => {
           dispatch(initAuthState());
           break;
 
+        case "forgotPassword_failure":
+          switch (data.code) {
+            case "UserNotFoundException":
+              setForgotConfirmErr("ユーザー情報が存在しません。");
+              break;
+            case "LimitExceededException":
+              setForgotConfirmErr(
+                "リクエスト回数が制限を超えました。24時間後に再実行してください。"
+              );
+              break;
+            case "TooManyRequestsException":
+              setForgotConfirmErr(
+                "リクエスト回数が制限を超えました。24時間後に再実行してください。"
+              );
+              break;
+            default:
+              setForgotConfirmErr(
+                "原因不明のエラーが発生しました。管理者にご連絡ください。"
+              );
+              break;
+          }
+          console.log(JSON.stringify(data));
+          break;
+
+        case "forgotPasswordSubmit_failure":
+          switch (data.code) {
+            case "CodeMismatchException":
+              setForgotErr("認証コードが誤っています。");
+              break;
+
+            case "ExpiredCodeException":
+              setForgotErr("認証コードの有効期限が切れています。");
+              break;
+
+            case "InvalidPasswordException":
+              setForgotErr("パスワードに無効な値が入力されています。");
+              break;
+
+            case "LimitExceededException":
+              setForgotErr(
+                "リクエスト回数が制限を超えました。24時間後に再実行してください。"
+              );
+              break;
+
+            case "TooManyFailedAttemptsException":
+              setForgotErr(
+                "認証の失敗回数が多すぎるので24時間後に再実行してください。"
+              );
+              break;
+
+            case "TooManyRequestsException":
+              setForgotErr(
+                "リクエスト回数が制限を超えました。24時間後に再実行してください。"
+              );
+              break;
+
+            default:
+              setForgotErr(
+                "原因不明のエラーが発生しました。管理者にご連絡ください。"
+              );
+              break;
+          }
+          console.log(JSON.stringify(data));
+          break;
+
         default:
           console.log("該当なし");
           break;
@@ -112,5 +179,7 @@ export const useAppHook = () => {
   return {
     signInInfo,
     signInErr,
+    forgotErr,
+    forgotConfirmErr,
   };
 };
