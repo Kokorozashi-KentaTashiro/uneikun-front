@@ -21,6 +21,8 @@ import {
   detailPdfUrlElementSx,
   ApplicantButton,
   applicantButtonSx,
+  disableTextFieldSx,
+  pdfUrlLinkSx,
 } from "themes/tournamentDetailTheme";
 import { useTournamentDetailHook } from "hooks/tournamentDetailHook";
 import { tournamentClasses } from "common/constants";
@@ -63,6 +65,7 @@ const TournamentDetail = () => {
                     label="大会名"
                     variant="outlined"
                     value={tournamentDetailInfo.tournamentTitle}
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -75,6 +78,7 @@ const TournamentDetail = () => {
                       tournamentClasses[tournamentDetailInfo.tournamentClass]
                         .label
                     }
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -87,6 +91,7 @@ const TournamentDetail = () => {
                     label="開催日"
                     variant="outlined"
                     value={tournamentDetailInfo.eventDate}
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -96,6 +101,7 @@ const TournamentDetail = () => {
                     label="開催場所"
                     variant="outlined"
                     value={tournamentDetailInfo.place}
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -108,6 +114,7 @@ const TournamentDetail = () => {
                     label="申込開始日"
                     variant="outlined"
                     value={tournamentDetailInfo.applicationStartDate}
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -118,6 +125,7 @@ const TournamentDetail = () => {
                     label="申込終了日"
                     variant="outlined"
                     value={tournamentDetailInfo.applicationEndDate}
+                    sx={disableTextFieldSx}
                     disabled
                   />
                 </FormControl>
@@ -125,7 +133,11 @@ const TournamentDetail = () => {
 
               <TournamentRegistRow sx={tournamentRegistRowSx}>
                 <FormControl variant="outlined" sx={detailPdfUrlElementSx}>
-                  <CommonLink underline="hover" onClick={onClickPdfLink}>
+                  <CommonLink
+                    underline="hover"
+                    onClick={onClickPdfLink}
+                    sx={pdfUrlLinkSx}
+                  >
                     {"要項はこちら(別タブで開く)"}
                   </CommonLink>
                 </FormControl>

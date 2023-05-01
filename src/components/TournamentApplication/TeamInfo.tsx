@@ -22,11 +22,12 @@ import {
   teamRankElementSx,
   teamAddressElementSx,
   teamPhoneElementSx,
-  teamEmailElementSx,
+  teamFaxElementSx,
   teamManagerElementSx,
   teamSexElementSx,
   SinglesExplanationTypography,
   singlesExplanationTypographySx,
+  elementSx,
 } from "themes/TournamentApplication/teamInfoTheme";
 
 import {
@@ -63,6 +64,7 @@ const TeamInfo: FC = () => {
                 onChange={(e) => {
                   dispatch(setTeamZone(e.target.value));
                 }}
+                sx={elementSx}
               >
                 {zones.map((zone, key) => (
                   <MenuItem key={key} value={zone.index}>
@@ -80,10 +82,31 @@ const TeamInfo: FC = () => {
                 onChange={(e) => {
                   dispatch(setTeam(e.target.value));
                 }}
+                sx={elementSx}
               >
                 {teamSelectChoice.map((team, key) => (
                   <MenuItem key={key} value={team.index}>
                     {team.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </TeamInfoRow>
+          <TeamInfoRow sx={teamInfoRowSx}>
+            <FormControl variant="outlined" sx={teamSexElementSx}>
+              <InputLabel id="select">性別</InputLabel>
+              <Select
+                labelId="select"
+                id="select"
+                value={teamInfo.teamSex}
+                onChange={(e) => {
+                  dispatch(setTeamSex(e.target.value));
+                }}
+                sx={elementSx}
+              >
+                {sexies.map((sex, key) => (
+                  <MenuItem key={key} value={sex.index}>
+                    {sex.label}
                   </MenuItem>
                 ))}
               </Select>
@@ -98,6 +121,7 @@ const TeamInfo: FC = () => {
                   dispatch(setTeamRank(e.target.value));
                 }}
                 disabled={tournamentClass === 1}
+                sx={elementSx}
               />
             </FormControl>
             {tournamentClass === 1 && (
@@ -106,6 +130,7 @@ const TeamInfo: FC = () => {
               </SinglesExplanationTypography>
             )}
           </TeamInfoRow>
+
           <TeamInfoRow sx={teamInfoRowSx}>
             <FormControl variant="outlined" sx={teamAddressElementSx}>
               <TextField
@@ -116,6 +141,7 @@ const TeamInfo: FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   dispatch(setTeamAddress(e.target.value));
                 }}
+                sx={elementSx}
               />
             </FormControl>
           </TeamInfoRow>
@@ -129,9 +155,10 @@ const TeamInfo: FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   dispatch(setTeamPhone(e.target.value));
                 }}
+                sx={elementSx}
               />
             </FormControl>
-            <FormControl variant="outlined" sx={teamEmailElementSx}>
+            <FormControl variant="outlined" sx={teamFaxElementSx}>
               <TextField
                 id="team-fax"
                 variant="outlined"
@@ -140,6 +167,7 @@ const TeamInfo: FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   dispatch(setTeamFax(e.target.value));
                 }}
+                sx={elementSx}
               />
             </FormControl>
           </TeamInfoRow>
@@ -153,26 +181,8 @@ const TeamInfo: FC = () => {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   dispatch(setTeamManager(e.target.value));
                 }}
+                sx={elementSx}
               />
-            </FormControl>
-          </TeamInfoRow>
-          <TeamInfoRow sx={teamInfoRowSx}>
-            <FormControl variant="outlined" sx={teamSexElementSx}>
-              <InputLabel id="select">性別</InputLabel>
-              <Select
-                labelId="select"
-                id="select"
-                value={teamInfo.teamSex}
-                onChange={(e) => {
-                  dispatch(setTeamSex(e.target.value));
-                }}
-              >
-                {sexies.map((sex, key) => (
-                  <MenuItem key={key} value={sex.index}>
-                    {sex.label}
-                  </MenuItem>
-                ))}
-              </Select>
             </FormControl>
           </TeamInfoRow>
         </TeamInfoCardContent>

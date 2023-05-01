@@ -1,5 +1,5 @@
 import { SxProps, Theme } from "@mui/material/styles";
-import { Card, CardMedia, CardContent, Box, Typography } from "@mui/material";
+import { Card, CardMedia, CardContent, Box } from "@mui/material";
 import emotionStyled from "@emotion/styled";
 
 // emotionStyled（スタイル）
@@ -47,60 +47,70 @@ font-weight: normal;
 
 // Theme（レスポンシブスタイル）
 export const teamInfoCardSx: SxProps<Theme> = {
-  width: { xs: 300, md: 750 },
-  minHeight: { xs: 300, md: 550 },
+  width: { xs: 340, sm: 550, md: 750 },
+  height: { xs: 440, sm: 520, md: 540 },
   margin: { xs: 1, md: 2 },
 };
 
 export const teamInfoCardMediaSx: SxProps<Theme> = {
-  width: { xs: 300, md: 750 },
-  minHeight: { xs: 50, md: 100 },
+  width: { xs: 340, sm: 550, md: 750 },
+  height: { xs: 30, sm: 40, md: 50 },
   fontSize: { xs: 15, md: 25 },
 };
 
 export const teamInfoCardContentSx: SxProps<Theme> = {
-  minHeight: { xs: 50, md: 450 },
+  height: { xs: 410, sm: 480, md: 490 },
+  gap: { xs: 1.5, sm: 2, md: 2 },
 };
 
 export const teamInfoRowSx: SxProps<Theme> = {
-  width: { xs: 300, md: 650 },
-  marginTop: 2,
-  marginBottom: 2,
-  gap: 5,
+  width: { xs: 340, sm: 550, md: 750 },
+  gap: { xs: 1, sm: 2, md: 3 },
+};
+
+export const elementSx: SxProps<Theme> = {
+  "& div input": {
+    fontSize: { xs: 12, sm: 14, md: 18 },
+    height: { xs: 20, sm: 30, md: 30 },
+  },
+  "& div label": {
+    fontSize: { xs: 12, sm: 14, md: 18 },
+  },
 };
 
 export const teamElementSx: SxProps<Theme> = {
-  width: { xs: 100, md: 240 },
+  width: { xs: 150, sm: 200, md: 240 },
 };
 
 export const teamZoneElementSx: SxProps<Theme> = {
-  width: { xs: 100, md: 140 },
-};
-
-export const teamRankElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 90 },
-};
-
-export const teamAddressElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 550 },
-};
-
-export const teamPhoneElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 255 },
-};
-
-export const teamEmailElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 255 },
-};
-
-export const teamManagerElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 350 },
+  width: { xs: 150, sm: 200, md: 240 },
 };
 
 export const teamSexElementSx: SxProps<Theme> = {
-  width: { xs: 15, md: 90 },
+  width: { xs: 150, sm: 200, md: 240 },
+};
+
+export const teamRankElementSx: SxProps<Theme> = {
+  width: { xs: 150, sm: 200, md: 240 },
+};
+
+export const teamAddressElementSx: SxProps<Theme> = {
+  width: { xs: 300, sm: 417, md: 505 },
+};
+
+export const teamPhoneElementSx: SxProps<Theme> = {
+  width: { xs: 145, sm: 200, md: 240 },
+};
+
+export const teamFaxElementSx: SxProps<Theme> = {
+  width: { xs: 145, sm: 200, md: 240 },
+};
+
+export const teamManagerElementSx: SxProps<Theme> = {
+  width: { xs: 300, sm: 417, md: 505 },
 };
 
 export const singlesExplanationTypographySx: SxProps<Theme> = {
-  fontSize: { xs: 12, md: 14 },
+  fontSize: { xs: 12, sm: 14, md: 18 },
+  width: { xs: 300, sm: 417, md: 505 },
 };

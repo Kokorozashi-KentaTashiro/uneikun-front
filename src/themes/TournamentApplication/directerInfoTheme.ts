@@ -34,24 +34,30 @@ font-weight: bold;
 
 // チーム情報カードスタイル
 export const directerInfoCardSx: SxProps<Theme> = {
-  width: { xs: 300, md: 750 },
-  height: { xs: 300, md: 450 },
+  width: { xs: 340, sm: 550, md: 750 },
+  height: { xs: 330, sm: 420, md: 480 },
   margin: { xs: 1, md: 2 },
 };
 
 export const directerCardMediaSx: SxProps<Theme> = {
-  width: { xs: 300, md: 750 },
-  height: { xs: 50, md: 80 },
+  width: { xs: 340, sm: 550, md: 750 },
+  height: { xs: 30, sm: 40, md: 50 },
   fontSize: { xs: 15, md: 25 },
 };
 
 export const directerCardContentSx: SxProps<Theme> = {
-  height: { xs: 50, md: 370 },
+  height: { xs: 300, sm: 380, md: 430 },
+  gap: { xs: 1.5, sm: 2, md: 2 },
 };
 
 // Element
 export const directerElementSx: SxProps<Theme> = {
-  width: { xs: 100, md: 350 },
-  marginTop: 1,
-  marginBottom: 1,
+  "& div input": {
+    fontSize: { xs: 12, sm: 14, md: 18 },
+    height: { xs: 20, sm: 30, md: 30 },
+  },
+  "& div label": {
+    fontSize: { xs: 12, sm: 14, md: 18 },
+  },
+  width: { xs: 250, sm: 380, md: 450 },
 };
