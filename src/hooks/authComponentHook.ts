@@ -181,7 +181,7 @@ export const useAuthComponentHook = () => {
   const checkSignUpPassword = useCallback(() => {
     // 桁数チェック
     let lengthCheck = false;
-    if (signUpInfo.password.length < 8) {
+    if (signUpInfo.password.length < 6) {
       lengthCheck = true;
     }
 
@@ -193,23 +193,23 @@ export const useAuthComponentHook = () => {
     }
 
     // 特殊文字を含む
-    let specialCheck = false;
-    const specialPattern = new RegExp(
-      `[\\^||\\$||\\*||\\.||\\[||\\]||\\{||\\}||\\(||\\)||\\?||\\-||\\"||\\!||\\@||\\#||\\%||\\&||\\/||\\,||\\>||\\<||\\'||\\:||\\;||\\|||\\_||\\~||\\+||\\=]`
-    );
-    const specialSinglePattern = new RegExp("[' || /]");
-    if (!specialPattern.test(signUpInfo.password)) {
-      if (!specialSinglePattern.test(signUpInfo.password)) {
-        specialCheck = true;
-      }
-    }
+    // let specialCheck = false;
+    // const specialPattern = new RegExp(
+    //   `[\\^||\\$||\\*||\\.||\\[||\\]||\\{||\\}||\\(||\\)||\\?||\\-||\\"||\\!||\\@||\\#||\\%||\\&||\\/||\\,||\\>||\\<||\\'||\\:||\\;||\\|||\\_||\\~||\\+||\\=]`
+    // );
+    // const specialSinglePattern = new RegExp("[' || /]");
+    // if (!specialPattern.test(signUpInfo.password)) {
+    //   if (!specialSinglePattern.test(signUpInfo.password)) {
+    //     specialCheck = true;
+    //   }
+    // }
 
     // 大文字を含む
-    let upperCheck = false;
-    const upperPattern = new RegExp(`[A-Z]`);
-    if (!upperPattern.test(signUpInfo.password)) {
-      upperCheck = true;
-    }
+    // let upperCheck = false;
+    // const upperPattern = new RegExp(`[A-Z]`);
+    // if (!upperPattern.test(signUpInfo.password)) {
+    //   upperCheck = true;
+    // }
 
     // 小文字を含む
     let lowerCheck = false;
@@ -221,14 +221,14 @@ export const useAuthComponentHook = () => {
     // レスポンス判定
     let errArray = [];
     if (lengthCheck) {
-      errArray.push("パスワードは8文字以上を入力してください");
+      errArray.push("パスワードは6文字以上を入力してください");
     }
-    if (specialCheck) {
-      errArray.push("パスワードに特殊文字を含めてください");
-    }
-    if (upperCheck) {
-      errArray.push("パスワードに大文字を含めてください");
-    }
+    // if (specialCheck) {
+    //   errArray.push("パスワードに特殊文字を含めてください");
+    // }
+    // if (upperCheck) {
+    //   errArray.push("パスワードに大文字を含めてください");
+    // }
     if (lowerCheck) {
       errArray.push("パスワードに子文字を含めてください");
     }
@@ -239,8 +239,8 @@ export const useAuthComponentHook = () => {
 
     if (
       lengthCheck ||
-      specialCheck ||
-      upperCheck ||
+      // specialCheck ||
+      // upperCheck ||
       lowerCheck ||
       numberCheck
     ) {
@@ -254,7 +254,7 @@ export const useAuthComponentHook = () => {
   const checkResetPassword = useCallback(() => {
     // 桁数チェック
     let lengthCheck = false;
-    if (passwordResetInfo.newPassword.length < 8) {
+    if (passwordResetInfo.newPassword.length < 6) {
       lengthCheck = true;
     }
 
@@ -266,23 +266,23 @@ export const useAuthComponentHook = () => {
     }
 
     // 特殊文字を含む
-    let specialCheck = false;
-    const specialPattern = new RegExp(
-      `[\\^||\\$||\\*||\\.||\\[||\\]||\\{||\\}||\\(||\\)||\\?||\\-||\\"||\\!||\\@||\\#||\\%||\\&||\\/||\\,||\\>||\\<||\\'||\\:||\\;||\\|||\\_||\\~||\\+||\\=]`
-    );
-    const specialSinglePattern = new RegExp("[' || /]");
-    if (!specialPattern.test(passwordResetInfo.newPassword)) {
-      if (!specialSinglePattern.test(passwordResetInfo.newPassword)) {
-        specialCheck = true;
-      }
-    }
+    // let specialCheck = false;
+    // const specialPattern = new RegExp(
+    //   `[\\^||\\$||\\*||\\.||\\[||\\]||\\{||\\}||\\(||\\)||\\?||\\-||\\"||\\!||\\@||\\#||\\%||\\&||\\/||\\,||\\>||\\<||\\'||\\:||\\;||\\|||\\_||\\~||\\+||\\=]`
+    // );
+    // const specialSinglePattern = new RegExp("[' || /]");
+    // if (!specialPattern.test(passwordResetInfo.newPassword)) {
+    //   if (!specialSinglePattern.test(passwordResetInfo.newPassword)) {
+    //     specialCheck = true;
+    //   }
+    // }
 
     // 大文字を含む
-    let upperCheck = false;
-    const upperPattern = new RegExp(`[A-Z]`);
-    if (!upperPattern.test(passwordResetInfo.newPassword)) {
-      upperCheck = true;
-    }
+    // let upperCheck = false;
+    // const upperPattern = new RegExp(`[A-Z]`);
+    // if (!upperPattern.test(passwordResetInfo.newPassword)) {
+    //   upperCheck = true;
+    // }
 
     // 小文字を含む
     let lowerCheck = false;
@@ -294,14 +294,14 @@ export const useAuthComponentHook = () => {
     // レスポンス判定
     let errArray = [];
     if (lengthCheck) {
-      errArray.push("パスワードは8文字以上を入力してください");
+      errArray.push("パスワードは6文字以上を入力してください");
     }
-    if (specialCheck) {
-      errArray.push("パスワードに特殊文字を含めてください");
-    }
-    if (upperCheck) {
-      errArray.push("パスワードに大文字を含めてください");
-    }
+    // if (specialCheck) {
+    //   errArray.push("パスワードに特殊文字を含めてください");
+    // }
+    // if (upperCheck) {
+    //   errArray.push("パスワードに大文字を含めてください");
+    // }
     if (lowerCheck) {
       errArray.push("パスワードに子文字を含めてください");
     }
@@ -312,8 +312,8 @@ export const useAuthComponentHook = () => {
 
     if (
       lengthCheck ||
-      specialCheck ||
-      upperCheck ||
+      // specialCheck ||
+      // upperCheck ||
       lowerCheck ||
       numberCheck
     ) {

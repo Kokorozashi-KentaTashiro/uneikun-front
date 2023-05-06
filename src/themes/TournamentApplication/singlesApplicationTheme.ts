@@ -35,7 +35,7 @@ position: relative;
 
 // Theme（レスポンシブスタイル）
 export const singlesApplicantTableSx: SxProps<Theme> = {
-  width: { xs: 300, md: 750 },
+  width: { xs: 340, sm: 550, md: 750 },
   margin: { xs: 1, md: 2 },
 };
 
@@ -48,24 +48,26 @@ export const singlesApplicantTableHeadRowSx: SxProps<Theme> = {
     fontWeight: "bold",
     color: "#151515",
     backgroundColor: "#D9D9D9",
+    fontSize: { xs: 12, sm: 14, md: 18 },
   },
+
   "& th:nth-child(1)": {
-    width: 50,
+    width: { xs: 20, sm: 30, md: 50 },
   },
   "& th:nth-child(2)": {
-    width: 50,
+    width: { xs: 20, sm: 30, md: 50 },
   },
   "& th:nth-child(3)": {
-    width: 100,
+    width: { xs: 20, sm: 30, md: 50 },
   },
   "& th:nth-child(4)": {
-    width: 20,
+    width: { xs: 20, sm: 30, md: 50 },
   },
   "& th:nth-child(5)": {
-    width: 20,
+    width: { xs: 20, sm: 30, md: 50 },
   },
   "& th:nth-child(6)": {
-    width: 20,
+    width: { xs: 20, sm: 30, md: 50 },
   },
 };
 

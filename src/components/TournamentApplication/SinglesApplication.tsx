@@ -58,8 +58,8 @@ const SinglesApplication: FC = () => {
         <Table aria-label="customized table">
           <TableHead sx={singlesApplicantTableHeadeSx}>
             <TableRow sx={singlesApplicantTableHeadRowSx}>
-              <TableCell align="center">参加者氏名（姓）</TableCell>
-              <TableCell align="center">参加者氏名（名）</TableCell>
+              <TableCell align="center">姓</TableCell>
+              <TableCell align="center">名</TableCell>
               <TableCell align="center">生年月日</TableCell>
               <TableCell align="center">学年</TableCell>
               <TableCell align="center">支部大会順位</TableCell>

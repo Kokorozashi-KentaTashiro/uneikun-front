@@ -130,7 +130,7 @@ const Header: FC = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="設定を開く">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: 1.5 }}>
-                <Avatar>{userInfo.firstName.charAt(0)}</Avatar>
+                <Avatar translate="no">{userInfo.firstName.charAt(0)}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

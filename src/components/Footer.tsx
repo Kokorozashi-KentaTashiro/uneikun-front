@@ -17,7 +17,8 @@ const Footer: FC = () => {
         height: { xs: 56, md: 79 },
       }}
     >
-      <p>© table tennis club of junior high school in Chiba</p>
+      <p translate="no">© uneikun pre-release</p>
+      {/* <p>© table tennis club of junior high school in Chiba</p> */}
     </CustomBottomNavigation>
   );
 };
