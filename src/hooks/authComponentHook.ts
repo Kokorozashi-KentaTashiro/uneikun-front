@@ -8,6 +8,7 @@ import {
   selectSignInInfo,
   selectPasswordResetInfo,
   initPasswordResetInfo,
+  setPasswordResetResetStatus,
 } from "ducks/auth/slice";
 import { SignUpInfo, SignInInfo, PasswordResetInfo } from "ducks/auth/type";
 import { AppDispatch } from "app/store";
@@ -130,6 +131,7 @@ export const useAuthComponentHook = () => {
   // [SMS送信（パスワードリセット）]
   const forgotPassword = async () => {
     await Auth.forgotPassword(`+81${passwordResetInfo.phone.slice(1)}`);
+    dispatch(setPasswordResetResetStatus(1));
   };
 
   // [リセット（パスワードリセット）]
